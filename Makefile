@@ -7,7 +7,9 @@ GO_STATIC_BIN = $(BUILD_DIR)/cgo_static
 GO_DYNAMIC_BIN = $(BUILD_DIR)/cgo_dynamic
 #LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:./lib
 
-.PHONY: all static dynamic clean
+.PHONY: build all static dynamic clean bench
+
+build: gcc all
 
 all: static dynamic
 
@@ -32,3 +34,6 @@ gcc:
 ldd:
 	ldd $(GO_DYNAMIC_BIN)
 	ldd $(GO_STATIC_BIN)
+
+bench:
+	LD_LIBRARY_PATH=./lib CGO_ENABLED=1 go test -bench . -benchmem -count=1

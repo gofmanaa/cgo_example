@@ -3,3 +3,4 @@ lib/*.o
 lib/*.a
 lib/*.so
 .idea
+build/*
